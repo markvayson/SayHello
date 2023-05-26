@@ -11,11 +11,19 @@ datasource db {
   relationMode = "prisma"
 }
 
-
-model Example {
-    id        String   @id @default(cuid())
+model Tweet {
+    id String @id @default(uuid())
+    userId String
+    content String
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+
+    user User @relAtion(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
+}
+
+model Like {
+
 }
 
 // Necessary for Next auth
